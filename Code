@@ -1,0 +1,144 @@
+import java.util.Scanner;
+
+public class Prueba1 {
+
+    abstract class Videojuego {
+        protected String titulo;
+        protected String genero;
+
+        public Videojuego(String titulo, String genero) {
+            this.titulo = titulo;
+            this.genero = genero;
+        }
+
+        public String getTitulo() {
+            return titulo;
+        }
+
+        public abstract void describirJuego();
+    }
+
+    class MOBA extends Videojuego {
+        public MOBA(String titulo) {
+            super(titulo, "MOBA");
+        }
+
+        @Override
+        public void describirJuego() {
+            switch (this.getTitulo().toLowerCase()) {
+                case "league of legends":
+                    System.out.println("League of Legends: Juego de estrategia en tiempo real donde equipos de cinco luchan en un mapa con el objetivo de destruir el nexo enemigo.");
+                    break;
+                case "dota 2":
+                    System.out.println("Dota 2: Juego de estrategia en el que equipos de cinco jugadores controlan héroes con habilidades únicas para destruir la base del equipo contrario.");
+                    break;
+                case "smite":
+                    System.out.println("Smite: MOBA en tercera persona donde los jugadores controlan a dioses y mitologías, compitiendo para destruir la base enemiga.");
+                    break;
+                default:
+                    System.out.println("Descripción no disponible para este juego MOBA.");
+            }
+        }
+    }
+
+    class FPS extends Videojuego {
+        public FPS(String titulo) {
+            super(titulo, "FPS");
+        }
+
+        @Override
+        public void describirJuego() {
+            switch (this.getTitulo().toLowerCase()) {
+                case "counter-strike: global offensive":
+                    System.out.println("Counter Strike: Global Offensive: Shooter táctico en primera persona donde equipos de terroristas y antiterroristas se enfrentan en rondas intensas.");
+                    break;
+                case "overwatch":
+                    System.out.println("Overwatch: Shooter en equipo basado en héroes, donde jugadores con habilidades únicas compiten en partidas rápidas y estratégicas.");
+                    break;
+                case "call of duty: modern warfare":
+                    System.out.println("Call of Duty: Modern Warfare: Shooter en primera persona con un enfoque en combate moderno, ofreciendo tanto una campaña narrativa como modos multijugador intensos.");
+                    break;
+                default:
+                    System.out.println("Descripción no disponible para este juego FPS.");
+            }
+        }
+    }
+
+    class JRPG extends Videojuego {
+        public JRPG(String titulo) {
+            super(titulo, "JRPG");
+        }
+
+        @Override
+        public void describirJuego() {
+            switch (this.getTitulo().toLowerCase()) {
+                case "final fantasy xv":
+                    System.out.println("Final Fantasy XV: RPG de mundo abierto que sigue a un príncipe y sus amigos en un viaje épico para salvar su reino de las fuerzas del mal.");
+                    break;
+                case "persona 5":
+                    System.out.println("Persona 5: JRPG que combina la vida cotidiana de un estudiante con combates en mazmorras, mientras lucha contra la corrupción en la sociedad.");
+                    break;
+                case "xenoblade chronicles 2":
+                    System.out.println("Xenoblade Chronicles 2: RPG de acción en un vasto mundo abierto donde los jugadores controlan a un grupo de personajes con habilidades especiales en su búsqueda para salvar el mundo.");
+                    break;
+                default:
+                    System.out.println("Descripción no disponible para este JRPG.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Prueba1 prueba = new Prueba1();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("¿En qué tipo de juego estás interesado? (MOBA, FPS, JRPG)");
+        String tipoJuego = scanner.nextLine().toUpperCase();
+
+        switch (tipoJuego) {
+            case "MOBA":
+                System.out.println("Aquí tienes tres opciones de juegos MOBA:");
+                System.out.println("1. League of Legends\n2. Dota 2\n3. Smite");
+                break;
+            case "FPS":
+                System.out.println("Aquí tienes tres opciones de juegos FPS:");
+                System.out.println("1. Counter-Strike: Global Offensive\n2. Overwatch\n3. Call of Duty: Modern Warfare");
+                break;
+            case "JRPG":
+                System.out.println("Aquí tienes tres opciones de juegos JRPG:");
+                System.out.println("1. Final Fantasy XV\n2. Persona 5\n3. Xenoblade Chronicles 2");
+                break;
+            default:
+                System.out.println("Tipo de juego no reconocido.");
+                return;
+        }
+
+        System.out.println("Elige un juego ingresando su título:");
+        String tituloJuego = scanner.nextLine();
+
+        Videojuego juegoSeleccionado = null;
+        switch (tituloJuego.toLowerCase()) {
+            case "league of legends":
+            case "dota 2":
+            case "smite":
+                juegoSeleccionado = prueba.new MOBA(tituloJuego);
+                break;
+            case "counter-strike: global offensive":
+            case "overwatch":
+            case "call of duty: modern warfare":
+                juegoSeleccionado = prueba.new FPS(tituloJuego);
+                break;
+            case "final fantasy xv":
+            case "persona 5":
+            case "xenoblade chronicles 2":
+                juegoSeleccionado = prueba.new JRPG(tituloJuego);
+                break;
+            default:
+                System.out.println("Juego no reconocido.");
+                return;
+        }
+
+        if (juegoSeleccionado != null) {
+            juegoSeleccionado.describirJuego();
+        }
+    }
+}
